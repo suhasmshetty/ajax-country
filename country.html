@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+<script>
+function autocompleteMethod(textBox){
+$('#languageList').empty(); 
+$.ajax({
+		type: "GET",
+		url: "https://restcountries.eu/rest/v1/name/" + textBox.value,
+		success: function(data){
+		console.log(data.length)
+			//console.log(data[0].name);
+			data.forEach(function(country) {
+				console.log(country.name);
+				$('#languageList').append("<option value='" + country.name + "'>");
+				
+			});
+			
+		}
+		});	
+	}
+</script>
+</head>
+	<body>
+<input type="text" id="txtAutoComplete" onkeyup="autocompleteMethod(this)" list="languageList"/><!--your input textbox-->
+<datalist id="languageList">
+</datalist>
+</body>
+</html>
